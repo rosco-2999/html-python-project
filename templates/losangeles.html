@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Los Angeles</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<style>
+</style>
+<script src=""></script>
+<style>
+</style>
+<body style="background-color: rgb(169, 235, 235);"></body>
+<h1> Los Angeles, California</h1> <img src="{{ url_for('static', filename='images/cali.jpg') }} " height= 50px width = 50px>
+<h2> LA is home to some of the most evil people in the music industry. The evil YEAR0001 boss ran away after hearing what we did in Stockholm and London. Once we find him, we're going to defeat him and get our music back! <br><br>
+<img src="{{ url_for('static', filename='images/legendarymember.png') }} " height= 200px width = 200px>
+    <br>
+<h2>There he is, the slimey guy! Let's get him, and get the last album "Legendary Member" back!</h2>
+<h5>Listen to Legendary Member before your fight?</h5>
+<audio controls>
+<source src="{{ url_for('static', filename='legendarymember.mp3') }}" type="audio/mpeg">
+</audio>
+<p><strong>Your HP:</strong> {{ player_hp }}<br>
+<strong>Enemy HP:</strong> {{ enemy_hp }}</p>
+<h3>Choose your action:</h3>
+
+<form action="/losangeles" method="POST">
+    <label>
+        <input type="radio" name="decision" value="attack" required>
+        Attack!
+    </label><br>
+
+    <label>
+        <input type="radio" name="decision" value="stagnate">
+        Do Nothing (Enemy goes first)
+    </label><br>
+
+    <button type="submit">GO!</button>
+    
+</form>
+<form action="/" method="get">
+    <button type="submit">Return to Home (Click To Reset Back To Start Upon Loss)</button>
+</form>
+{% if required_roll %}
+<form action="/losangeles" method="POST">
+    <input type="hidden" name="decision" value="player_roll">
+    <button type="submit">ROLL ATTACK</button>
+</form>
+{% endif %}
+
+<hr>
+
+<h3>Battle Log:</h3>
+{% for msg in messages %}
+    <p>{{ msg|safe }}</p>
+{% endfor %}
+
+{% if enemy_hp == 0 %}
+<form action="/ending" method="GET">
+    <button type="submit">Go to the end!</button>
+</form>
+{% endif %}
+
+
+</html>

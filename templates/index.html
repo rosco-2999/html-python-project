@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Selection</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<style>
+</style>
+<script src=""></script>
+<body style="background-color: rgb(85, 11, 11);">
+
+<img src="{{ url_for('static', filename='images/truetitlecard.png') }} ">
+<h5><span style="background-color: yellow;">Clear cache to replay the game! (Clear if you reset for a loss)</span></h5> 
+<h5><span style="background-color: yellow;">F11 to fullscreen for best experience</span></h5> 
+
+<br>
+
+<form class="dg-form" action = "/start" method="post">
+
+<!-- Lyrics -->
+<h2>Enter your username</h2>
+<textarea id="username" name="username" rows="1" cols="30" placeholder="Enter user here..."></textarea>
+<br><br><br>
+    <!-- Choose Your Character -->
+
+<h2>Choose your character</h2>
+    <label>
+    <input type="radio" name="character" value="Bladee">
+    <img src="{{ url_for('static', filename='images/majesticbladee.jpg') }} " width = 60px, height = 60px>
+</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<label>
+    <input type="radio" name="character" value="Ecco2k">
+    <img src="{{ url_for('static', filename='images/ecco2kcharacterselect.jpg') }} " width = 60px, height = 60px>
+</label><br>
+
+<label>
+    <input type="radio" name="character" value="Thaiboy">
+    <img src="{{ url_for('static', filename='images/thaiboycharacterselect.jpg') }} " width = 60px, height = 60px>
+</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<label>
+    <input type="radio" name="character" value="Whitearmour">
+    <img src="{{ url_for('static', filename='images/whitearmourcharacterselect.jpg') }} " width = 60px, height = 60px>
+</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</select>
+
+<img id="characterPreview" src="" alt="character preview" style="width:250px; display:none;">
+<!-- Slider -->
+<br>
+<br>
+<h2>Choose your weapon</h2>
+
+<div>
+
+    <label>
+        <input type="radio" name="weapon" value="Microphone">
+        Microphone 
+        <br>
+        <img src="{{ url_for('static', filename='images/microphoneweapon.jpg') }} " width = 30px, height = 30px>
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="weapon" value="Drumpad">
+        Drumpad 
+        <br>
+        <img src="{{ url_for('static', filename='images/drumpadweapon.png') }} " width = 40px, height = 40px>
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="weapon" value="Autotune">
+        Max Level Autotune 
+        <br>
+        <img src="{{ url_for('static', filename='images/autotuneweapon.jpg') }} " width = 40px, height = 40px>
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="weapon" value="Literal Sword">
+        Literal Sword 
+        <br>
+        <img src="{{ url_for('static', filename='images/swordweapon.jpg') }} " width = 40px, height = 40px>
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="weapon" value="Blick">
+        Blick 
+        <br>
+        <img src="{{ url_for('static', filename='images/blickweapon.png') }} " width = 40px, height = 40px>
+    </label>
+
+</div>
+
+
+<button type="submit">Start Game</button>
+<br>
+<a href="ending">
+    <button type="button">Go to Ending</button>
+</a>
+
+</form>
+
+
+</body>
+<script>
+const select = document.getElementById("characterSelect");
+const img = document.getElementById("characterPreview");
+
+select.addEventListener("change", function() {
+    const value = this.value;
+    console.log("Selected:", value);
+
+    if (value === "Bladee") {
+    img.src = "/static/images/majesticbladee.jpg";
+    img.style.display = "block";
+    img.alt = "Bladee";
+    } else if (value === "Ecco2k") {
+    img.src = "/static/images/ecco2k.jpg";
+    img.style.display = "block";
+    img.alt = "Ecco2k";
+    } else if (value === "Thaiboy") {
+    img.src = "/static/images/thaiboy.jpg";
+    img.style.display = "block";
+    img.alt = "Thaiboy";
+    } else {
+    img.src = "";
+    img.style.display = "none";
+    img.alt = "";
+    }
+});
+</script>
+</html>

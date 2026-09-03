@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Start</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<style>
+</style>
+<script src=""></script>
+<body style="background-color: rgb(229, 198, 247);"></body>
+<h1>Player: {{username}} </h1>
+<h3> Character: {{ character }}</h3>
+<h3>Weapon: {{ weapon }}</h3>
+<br>
+<h3>You are {{ character }}, a member of Drain Gang. The Evil Label Year0001 has trapped your friends in SBE! We must travel around the world in order to track down the goons and secure the stolen music. It's up to you, {{ character }}. </h3>
+
+<form action="/stockholm" method="get">
+    <button type="submit">Go to Stockholm</button>
+<br><br><br>
+    <img src="{{ url_for('static', filename='images/drainedout.gif') }} " height = 600px width = 1200px>
+</body>
+</html>

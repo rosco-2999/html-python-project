@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>London</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<style>
+</style>
+<body style="background-color: rgb(207, 123, 123);"></body>
+<h1>London, England </h1> <img src="{{ url_for('static', filename='images/london.png') }} " height= 50px width = 50px>
+<h2> Home of Ecco2k, actually being where he was born! He's traveled here in the hopes that he can find the only solo album he's ever released! Lets find this album and take down YEAR0001 <br><br>
+<img src="{{ url_for('static', filename='images/e.png') }} " height= 200px width = 200px>
+    <br>
+<h2>Oh no! I see the YEAR0001 executive! He's got the hit solo album "℮!" We have to get it back!</h2>
+<h5>Listen to Calcium before your fight?</h5>
+<audio controls>
+<source src="{{ url_for('static', filename='calcium.mp3') }}" type="audio/mpeg">
+</audio>
+<p><strong>Your HP:</strong> {{ player_hp }}<br>
+<strong>Executive HP:</strong> {{ enemy_hp }}</p>
+<h3>Choose your action:</h3>
+
+<form action="/london" method="POST">
+    <label>
+        <input type="radio" name="decision" value="attack" required>
+        Attack!
+    </label><br>
+
+    <label>
+        <input type="radio" name="decision" value="stagnate">
+        Do Nothing (Enemy goes first)
+    </label><br>
+
+    <button type="submit">GO!</button>
+    
+</form>
+<form action="/" method="get">
+    <button type="submit">Return to Home (Click To Reset Back To Start Upon Loss)</button>
+</form>
+{% if required_roll %}
+<form action="/london" method="POST">
+    <input type="hidden" name="decision" value="player_roll">
+    <button type="submit">ROLL ATTACK</button>
+</form>
+{% endif %}
+
+<hr>
+
+<h3>Battle Log:</h3>
+{% for msg in messages %}
+    <p>{{ msg|safe }}</p>
+{% endfor %}
+
+
+{% if enemy_hp == 0 %}
+<form action="/losangeles" method="GET">
+    <button type="submit">Go to Los Angeles</button>
+</form>
+{% endif %}
+
+</html>

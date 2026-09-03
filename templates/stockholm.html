@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Stockholm</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<style>
+</style>
+<script src=""></script>
+<body style="background-color: rgb(180, 133, 211);"></body>
+<h1>Stockholm, Sweden</h1> <img src="{{ url_for('static', filename='images/sweden.png') }} " height= 50px width = 50px>
+<h2>Home of Drain Gang and YEAR0001. This is where it all began, where Drain met SBE, where Gluee was recorded. Now YEAR0001 has taken over the entirety of Stockholm! What will we do? <br><br>
+<img src="{{ url_for('static', filename='images/gluee.jpg') }} " height= 200px width = 200px>
+    <br>
+<h2>Oh no! I see a YEAR0001 goon! He's got the hit mixtape "Gluee!" We have to get it back!</h2>
+<h5>Listen to Deletee (Intro) before your fight?</h5>
+<audio controls>
+<source src="{{ url_for('static', filename='deletee.mp3') }}" type="audio/mpeg">
+</audio>
+<p><strong>Your HP:</strong> {{ player_hp }}<br>
+<strong>Enemy HP:</strong> {{ enemy_hp }}</p>
+
+<hr>
+
+<h3>Choose your action:</h3>
+
+<form action="/stockholm" method="POST">
+    <label>
+        <input type="radio" name="decision" value="attack" required>
+        Attack!
+    </label><br>
+
+    <label>
+        <input type="radio" name="decision" value="stagnate">
+        Do Nothing (Enemy goes first)
+    </label><br>
+
+    <button type="submit">GO!</button>
+    
+    {% if state == "enemy_turn" %}
+<form method="POST" action="/losangeles">
+    <input type="hidden" name="decision" value="enemy_attack">
+    <button type="submit">Next</button>
+</form>
+
+{% endif %}
+</form>
+<form action="/" method="get">
+    <button type="submit">Return to Home (Click To Reset Back To Start Upon Loss)</button>
+</form>
+
+{% if required_roll %}
+<form action="/stockholm" method="POST">
+    <input type="hidden" name="decision" value="player_roll">
+    <button type="submit">ROLL ATTACK</button>
+</form>
+{% endif %}
+
+<hr>
+
+<h3>Battle Log:</h3>
+{% for msg in messages %}
+    <p>{{ msg|safe }}</p>
+{% endfor %}
+
+
+{% if enemy_hp == 0 %}
+<form action="/london" method="GET">
+    <button type="submit">Go to London</button>
+</form>
+{% endif %}
+ 
+</body>
+</html>
